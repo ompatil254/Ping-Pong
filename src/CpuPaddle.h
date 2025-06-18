@@ -12,7 +12,7 @@ class CpuPaddle : public Paddle{
     public:
     using Paddle::Paddle;
 
-    void Update(int ballY);
+    void Update(int& ballY);
 };
 
 

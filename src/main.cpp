@@ -12,12 +12,12 @@ constexpr Color LGreen = {129, 204, 184, 255};
 void collisionCheck(Ball& ball, int& computerScore, int& playerScore, Paddle& player1, Paddle& player2, int& limitX1, int& limitX2) {
     if (CheckCollisionCircleRec(Vector2{static_cast<float>(ball.x), static_cast<float>(ball.y)}, 20, Rectangle{static_cast<float>(player1.x), static_cast<float>(player1.y), static_cast<float>(player1.width), static_cast<float>(player1.height)})) {
         ball.speedX = -ball.speedX;
-        ball.x = std::max(ball.x, 35);
+        ball.x = 50;
     }
 
     if (CheckCollisionCircleRec(Vector2{static_cast<float>(ball.x), static_cast<float>(ball.y)}, 20, Rectangle{static_cast<float>(player2.x), static_cast<float>(player2.y), static_cast<float>(player2.width), static_cast<float>(player2.height)})) {
         ball.speedX = -ball.speedX;
-        ball.x = std::min(ball.x, GetScreenWidth()-35);
+        ball.x = GetScreenWidth()-50;
     }
 
     if (ball.x <= limitX1) {
@@ -41,9 +41,9 @@ int main() {
 
 
 
-    Ball ball(screenWidth/2, screenHeight/2, 8, 8, Yellow);
-    Paddle player1(10, screenHeight/2, 25, 120, 6);
-    CpuPaddle player2(screenWidth-35, screenHeight/2, 25, 120, 6);
+    Ball ball(screenWidth/2, screenHeight/2, 12, 12, Yellow);
+    Paddle player1(10, screenHeight/2, 25, 120, 8);
+    CpuPaddle player2(screenWidth-35, screenHeight/2, 25, 120, 8);
 
     int limitX1 = 28;
     int limitX2 = screenWidth-28;
@@ -59,9 +59,9 @@ int main() {
         DrawCircle(screenWidth/2, screenHeight/2, 150, LGreen);
         DrawLine(screenWidth/2, 0, screenWidth/2, screenHeight, WHITE);
         ball.Draw();
-        ball.Update();
         player1.Draw();
         player2.Draw();
+        ball.Update();
         player1.Update();
         player2.Update(ball.y);
         collisionCheck(ball, computerScore, playerScore, player1, player2, limitX1, limitX2);
